@@ -9,7 +9,6 @@ import Foundation
 struct Quotes {
     var text: String
     let author: String
-    let id = UUID()
 }
 
 struct allQuotes {
