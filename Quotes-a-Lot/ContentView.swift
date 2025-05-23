@@ -12,7 +12,6 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            // Background gradient
             LinearGradient(gradient: Gradient(colors: [.purple.opacity(0.2), .blue.opacity(0.2)]),
                            startPoint: .topLeading,
                            endPoint: .bottomTrailing)
@@ -25,26 +24,10 @@ struct ContentView: View {
                     .foregroundColor(.gray)
                     .padding(.horizontal)
                 
-                VStack(spacing: 20) {
-                    Text("“\(QuotesViewModel.currentQuote.text)”")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.indigo)
-                        .multilineTextAlignment(.center)
-                    
-                    Text("- \(QuotesViewModel.currentQuote.author)")
-                        .font(.subheadline)
-                        .italic()
-                        .foregroundColor(.secondary)
-                }
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(Color.white)
-                        .shadow(color: .gray.opacity(0.4), radius: 8, x: 0, y: 4)
-                )
-                .padding(.horizontal)
-
+                // Child view using @Binding
+                QuoteCardView(quote: $QuotesViewModel.currentQuote)
+                    .padding(.horizontal)
+                
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
                     createButton(text: "Funny", image: "face.smiling") {
                         QuotesViewModel.getRandomFunnyQuote()
